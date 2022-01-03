@@ -19,7 +19,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent
 class DamageLlama: Listener {
 
     @EventHandler
-    fun hitLlama(event: EntityDamageByEntityEvent){
+    fun hitLlama(event: EntityDamageByEntityEvent) {
         if(event.entity.location.world?.name == "world") {
             if (event.entityType == EntityType.LLAMA && event.damager is Player) {
                 event.damage = 1.0
