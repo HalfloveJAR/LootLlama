@@ -1,0 +1,11 @@
+name: LootLlama
+version: ${project.version}
+main: me.halflove.lootllama.Main
+api-version: 1.18
+authors: [ Halflove ]
+description: VoteParty LootLlama plugin for CrumbleCraft
+
+commands:
+  lootllama:
+    aliases: [llama]
+    usage: /Llama <arguments>
