@@ -1,5 +1,6 @@
 package me.halflove.lootllama.Misc
 
+import me.halflove.lootllama.Managers.LlamaAbilities
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Material
@@ -23,18 +24,16 @@ object DropItem {
         val contentsSection: ConfigurationSection? = Storage.data.getConfigurationSection("loot")
         if (contentsSection != null) {
             for(lootTableSlot in contentsSection.getKeys(false)) {
-                Bukkit.broadcastMessage("" + lootTableSlot.toInt())
                 lootTableSize += 1
             }
         }
     }
 
     fun itemDrop(loc: Location) {
-        val randomNumber = (0..2).random()
-        if(randomNumber == 0){
+        val randomNumber = (0..8).random()
+        if(randomNumber == 0) {
             val randomNumber2 = (1..lootTableSize).random()
             successfulDrop(loc, getSlotItemStack(randomNumber2))
-            Bukkit.broadcastMessage("$randomNumber2")
         }
     }
 

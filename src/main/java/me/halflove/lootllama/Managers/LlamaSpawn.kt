@@ -1,6 +1,7 @@
 package me.halflove.lootllama.Managers
 
 import me.halflove.lootllama.Misc.HealthBar
+import me.halflove.lootllama.Misc.Storage
 import org.bukkit.*
 import org.bukkit.entity.Entity
 import org.bukkit.entity.EntityType
@@ -22,6 +23,9 @@ import org.bukkit.potion.PotionEffectType
 
 object LlamaSpawn {
 
+    var llamaActive: Boolean = false
+    var customLlama: HashMap<Llama, Boolean> = HashMap<Llama, Boolean>()
+
     // Only world the Llama can spawn in (Spawn)
     private val world: World? = Bukkit.getWorld("world")
 
@@ -29,10 +33,15 @@ object LlamaSpawn {
     fun spawnLlama() {
         val lootLlama: Llama = world?.spawnEntity(getLocation(), EntityType.LLAMA) as Llama
         lootLlama.addPotionEffect(PotionEffect(PotionEffectType.GLOWING, 99999999, 1))
-        lootLlama.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 99999999, 2))
+        lootLlama.maxHealth = HealthBar.calcMaxHealth()
         lootLlama.health = HealthBar.calcMaxHealth()
+        lootLlama.customName = ChatColor.translateAlternateColorCodes('&', "&c&lL&6&la&e&lr&a&lr&b&ly")
+        lootLlama.isCustomNameVisible = true
         lootLlama.color = Llama.Color.CREAMY
+        lootLlama.isCarryingChest = true
         lootLlama.isTamed = true
+
+        customLlama[lootLlama] = true
 
         val randomNumber = (0..12).random()
         if(randomNumber == 0){
@@ -74,13 +83,14 @@ object LlamaSpawn {
         if(randomNumber == 12){
             lootLlama.inventory.decor = ItemStack(Material.WHITE_CARPET)
         }
+        llamaActive = true
     }
 
     // Get location to spawn Llama at
     private fun getLocation(): Location {
-        val x: Double = 13.0//0.0
-        val y: Double = 63.0//81.0
-        val z: Double = 140.0//26.0
+        val x: Double = Storage.data.get("spawn.x") as Double
+        val y: Double = Storage.data.get("spawn.y") as Double
+        val z: Double = Storage.data.get("spawn.z") as Double
         return Location(world, x, y, z)
     }
 
