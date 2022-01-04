@@ -27,8 +27,8 @@ class DamageLlama: Listener {
 
     @EventHandler
     fun hitLlama(event: EntityDamageByEntityEvent) {
-        if(LlamaSpawn.customLlama.containsKey(event.entity as Llama)) {
-            if (event.entityType == EntityType.LLAMA && event.damager is Player) {
+        if (event.entityType == EntityType.LLAMA && event.damager is Player) {
+            if(LlamaSpawn.customLlama.containsKey(event.entity as Llama)) {
                 event.damage = 1.0
                 DropItem.itemDrop(event.entity.location)
 
