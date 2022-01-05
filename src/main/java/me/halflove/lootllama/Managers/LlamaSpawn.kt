@@ -27,7 +27,7 @@ object LlamaSpawn {
     var customLlama: HashMap<Llama, Boolean> = HashMap<Llama, Boolean>()
 
     // Only world the Llama can spawn in (Spawn)
-    private val world: World? = Bukkit.getWorld("world")
+    private val world: World? = Bukkit.getWorld("world_spawn")
 
     // Spawn the llama at set location
     fun spawnLlama() {

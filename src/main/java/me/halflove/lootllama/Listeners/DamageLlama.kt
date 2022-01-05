@@ -51,7 +51,7 @@ class DamageLlama: Listener {
 
     @EventHandler
     fun feedLlama(event: PlayerInteractEntityEvent){
-        if(event.rightClicked.type == EntityType.LLAMA && event.player.location.world?.name == "world") {
+        if(event.rightClicked.type == EntityType.LLAMA && event.player.location.world?.name == "world_spawn") {
             event.isCancelled = true
         }
     }
