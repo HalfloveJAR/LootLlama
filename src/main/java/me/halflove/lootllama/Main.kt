@@ -24,4 +24,13 @@ class Main: JavaPlugin() {
         Storage.createDataFile(this)
         DropItem.generateLootTable()
     }
+
+    companion object {
+        @JvmStatic lateinit var instance: Main
+    }
+
+    init {
+        instance = this
+    }
+
 }

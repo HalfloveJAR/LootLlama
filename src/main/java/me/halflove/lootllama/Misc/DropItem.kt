@@ -1,11 +1,12 @@
 package me.halflove.lootllama.Misc
 
-import me.halflove.lootllama.Managers.LlamaAbilities
+import me.halflove.lootllama.Main
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.inventory.ItemStack
+import org.bukkit.scheduler.BukkitRunnable
 
 /*
 *
@@ -30,8 +31,8 @@ object DropItem {
     }
 
     fun itemDrop(loc: Location) {
-        val randomNumber = (0..8).random()
-        if(randomNumber == 0) {
+        val randomNumber = (1..100).random()
+        if(randomNumber >= 75) {
             val randomNumber2 = (1..lootTableSize).random()
             successfulDrop(loc, getSlotItemStack(randomNumber2))
         }
@@ -43,10 +44,18 @@ object DropItem {
 
     //Builds and returns the requested item (slot) stored in the data.yml
     private fun getSlotItemStack(slot: Int): ItemStack {
-        return ItemStack(
-            Material.valueOf(Storage.data.get("loot.$slot.type").toString()),
+
+        val stringAmount: String = Storage.data.get("loot.$slot.amount").toString()
+
+        val amount = if (stringAmount.contains('-')) {
+            val splitAmount = stringAmount.split("-")
+            val randomNumber = (splitAmount[0].toInt() .. splitAmount[1].toInt()).random()
+            randomNumber
+        } else {
             Storage.data.get("loot.$slot.amount") as Int
-        )
+        }
+
+        return ItemStack(Material.valueOf(Storage.data.get("loot.$slot.type").toString()), amount)
     }
 
 }

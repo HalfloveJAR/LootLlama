@@ -7,6 +7,7 @@ import org.bukkit.entity.EntityType
 import org.bukkit.entity.Llama
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
+import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.EntityDamageEvent
@@ -25,11 +26,10 @@ import org.bukkit.util.Vector
 
 class DamageLlama: Listener {
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     fun hitLlama(event: EntityDamageByEntityEvent) {
         if (event.entityType == EntityType.LLAMA && event.damager is Player) {
             if(LlamaSpawn.customLlama.containsKey(event.entity as Llama)) {
-                event.damage = 1.0
                 DropItem.itemDrop(event.entity.location)
 
                 var randomNumber = (0..7).random()
@@ -45,6 +45,7 @@ class DamageLlama: Listener {
                 if(randomNumber == 3) {
                     LlamaAbilities.warp(event.entity as Llama, event.damager as Player)
                 }
+                event.damage = 1.0
             }
         }
     }

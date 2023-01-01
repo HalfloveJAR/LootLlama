@@ -18,7 +18,7 @@ object HealthBar {
     fun calcMaxHealth(): Double {
         var hp: Double = 0.0
         for(player in Bukkit.getOnlinePlayers()){
-            hp += 12.0
+            hp += 15.0
         }
         return hp
     }
