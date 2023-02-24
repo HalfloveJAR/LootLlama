@@ -3,6 +3,7 @@ package me.halflove.lootllama
 import me.halflove.lootllama.managers.LlamaAbilities
 import me.halflove.lootllama.managers.LlamaSpawn
 import me.halflove.lootllama.misc.DropItem
+import org.bukkit.Bukkit
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Llama
 import org.bukkit.entity.Player
@@ -51,8 +52,8 @@ class Events: Listener {
     }
 
     @EventHandler
-    fun feedLlama(event: PlayerInteractEntityEvent){
-        if(event.rightClicked.type == EntityType.LLAMA && event.player.location.world?.name == "world_spawn") {
+    fun clickLlama(event: PlayerInteractEntityEvent){
+        if(event.rightClicked.type == EntityType.LLAMA && event.player.location.world?.name == "world") {
             event.isCancelled = true
         }
     }
@@ -67,7 +68,7 @@ class Events: Listener {
 
     @EventHandler
     fun hurtLlama(event: EntityDamageEvent) {
-        if(event.entity.type == EntityType.LLAMA && LlamaSpawn.customLlama.containsKey(event.entity as Llama)) {
+        if(event.entityType == EntityType.LLAMA && LlamaSpawn.customLlama.containsKey(event.entity as Llama)) {
             if(event.cause == EntityDamageEvent.DamageCause.FIRE) {
                 event.isCancelled = true
                 LlamaSpawn.customLlama.remove(event.entity as Llama)
