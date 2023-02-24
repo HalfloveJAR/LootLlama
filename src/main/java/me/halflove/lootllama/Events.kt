@@ -34,16 +34,16 @@ class Events: Listener {
                 DropItem.itemDrop(event.entity.location)
 
                 val randomNumber = (0..12).random()
-                if(randomNumber == 0 || randomNumber == 1) {
+                if(randomNumber == 0) { //7/13
                     LlamaAbilities.baby(event.entity as Llama)
                 }
-                if(randomNumber == 2 || randomNumber == 3) {
+                if(randomNumber == 1 || randomNumber == 2) {
                     LlamaAbilities.superSpeed(event.entity as Llama)
                 }
-                if(randomNumber == 4 || randomNumber == 5) {
+                if(randomNumber == 3) {
                     LlamaAbilities.knockback(event.entity as Llama)
                 }
-                if(randomNumber == 6) {
+                if(randomNumber == 4) {
                     LlamaAbilities.warp(event.entity as Llama, event.damager as Player)
                 }
                 event.damage = 1.0
