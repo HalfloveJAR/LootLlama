@@ -1,8 +1,8 @@
-package me.halflove.lootllama.Listeners
+package me.halflove.lootllama
 
-import me.halflove.lootllama.Managers.LlamaAbilities
-import me.halflove.lootllama.Managers.LlamaSpawn
-import me.halflove.lootllama.Misc.DropItem
+import me.halflove.lootllama.managers.LlamaAbilities
+import me.halflove.lootllama.managers.LlamaSpawn
+import me.halflove.lootllama.misc.DropItem
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Llama
 import org.bukkit.entity.Player
@@ -13,7 +13,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.event.player.PlayerInteractEntityEvent
-import org.bukkit.util.Vector
+import org.spigotmc.event.entity.EntityMountEvent
 
 /*
 *
@@ -24,7 +24,7 @@ import org.bukkit.util.Vector
 *
 */
 
-class DamageLlama: Listener {
+class Events: Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     fun hitLlama(event: EntityDamageByEntityEvent) {

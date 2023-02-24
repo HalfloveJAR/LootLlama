@@ -1,12 +1,9 @@
-package me.halflove.lootllama.Misc
+package me.halflove.lootllama.misc
 
-import me.halflove.lootllama.Main
-import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.inventory.ItemStack
-import org.bukkit.scheduler.BukkitRunnable
 
 /*
 *

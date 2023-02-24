@@ -1,9 +1,8 @@
 package me.halflove.lootllama
 
-import me.halflove.lootllama.Commands.LlamaEvent
-import me.halflove.lootllama.Listeners.DamageLlama
-import me.halflove.lootllama.Misc.DropItem
-import me.halflove.lootllama.Misc.Storage
+import me.halflove.lootllama.commands.LlamaEvent
+import me.halflove.lootllama.misc.DropItem
+import me.halflove.lootllama.misc.Storage
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -20,7 +19,7 @@ class Main: JavaPlugin() {
 
     override fun onEnable(){
         getCommand("lootllama")?.setExecutor(LlamaEvent())
-        Bukkit.getPluginManager().registerEvents(DamageLlama(), this)
+        Bukkit.getPluginManager().registerEvents(Events(), this)
         Storage.createDataFile(this)
         DropItem.generateLootTable()
     }

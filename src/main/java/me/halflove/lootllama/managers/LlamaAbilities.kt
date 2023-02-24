@@ -1,4 +1,4 @@
-package me.halflove.lootllama.Managers
+package me.halflove.lootllama.managers
 
 import org.bukkit.Bukkit
 import org.bukkit.Location

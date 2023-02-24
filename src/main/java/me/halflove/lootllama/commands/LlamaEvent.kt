@@ -1,15 +1,14 @@
-package me.halflove.lootllama.Commands
+package me.halflove.lootllama.commands
 
-import me.halflove.lootllama.Managers.LlamaAbilities
-import me.halflove.lootllama.Managers.LlamaSpawn
-import me.halflove.lootllama.Misc.Storage
+import me.halflove.lootllama.managers.LlamaAbilities
+import me.halflove.lootllama.managers.LlamaSpawn
+import me.halflove.lootllama.misc.Storage
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Sound
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
-import org.bukkit.entity.Llama
 import org.bukkit.entity.Player
 
 /*

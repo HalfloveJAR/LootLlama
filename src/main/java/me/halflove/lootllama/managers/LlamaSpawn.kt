@@ -1,13 +1,10 @@
-package me.halflove.lootllama.Managers
+package me.halflove.lootllama.managers
 
-import me.halflove.lootllama.Misc.HealthBar
-import me.halflove.lootllama.Misc.Storage
+import me.halflove.lootllama.misc.HealthBar
+import me.halflove.lootllama.misc.Storage
 import org.bukkit.*
-import org.bukkit.entity.Entity
 import org.bukkit.entity.EntityType
-import org.bukkit.entity.Horse
 import org.bukkit.entity.Llama
-import org.bukkit.inventory.EntityEquipment
 import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType

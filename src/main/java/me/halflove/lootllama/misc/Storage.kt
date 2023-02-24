@@ -1,4 +1,4 @@
-package me.halflove.lootllama.Misc
+package me.halflove.lootllama.misc
 
 import org.bukkit.Bukkit
 import org.bukkit.configuration.file.FileConfiguration
