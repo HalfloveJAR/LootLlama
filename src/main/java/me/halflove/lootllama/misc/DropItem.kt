@@ -29,7 +29,7 @@ object DropItem {
 
     fun itemDrop(loc: Location) {
         val randomNumber = (1..100).random()
-        if(randomNumber >= 75) {
+        if(randomNumber >= 69) {
             val randomNumber2 = (1..lootTableSize).random()
             successfulDrop(loc, getSlotItemStack(randomNumber2))
         }
