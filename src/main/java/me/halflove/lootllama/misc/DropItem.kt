@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack
 
 object DropItem {
 
-    var lootTableSize = 0
+    private var lootTableSize = 0
 
     fun generateLootTable(){
         val contentsSection: ConfigurationSection? = Storage.data.getConfigurationSection("loot")
