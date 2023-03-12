@@ -1,6 +1,8 @@
 package me.halflove.lootllama.managers
 
+import me.halflove.lootllama.misc.DropItem
 import org.bukkit.Bukkit
+import org.bukkit.ChatColor
 import org.bukkit.Location
 import org.bukkit.Sound
 import org.bukkit.entity.Llama
@@ -36,7 +38,7 @@ object LlamaAbilities {
                 llama.setAdult()
                 for(player: Player in Bukkit.getOnlinePlayers()) {
                     if(player.location.world == llama.location.world) {
-                        if(player.location.distance(llama.location) < 10) {
+                        if(player.location.distance(llama.location) < 10 && LlamaSpawn.llamaActive) {
                             player.playSound(player.location, Sound.ENTITY_WANDERING_TRADER_DRINK_POTION, 2.0F, 1.0F);
                         }
                     }
@@ -46,7 +48,7 @@ object LlamaAbilities {
     }
 
     fun warp(llama: Llama, attacker: Player) {
-        var lastLoc: Location = llama.location
+        val lastLoc: Location = llama.location
         llama.teleport(attacker.location)
         attacker.teleport(lastLoc)
         for(player: Player in Bukkit.getOnlinePlayers()) {
@@ -78,6 +80,13 @@ object LlamaAbilities {
             }
         }
         llama.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 150, 3))
+    }
+
+    fun grabLoot(attacker: Player) {
+        val randomNumber = (1..DropItem.lootTableSize).random()
+        attacker.inventory.addItem(DropItem.getSlotItemStack(randomNumber))
+        attacker.playSound(attacker.location, Sound.ENTITY_COW_HURT, 2.0F, 2.0F);
+        attacker.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&oYou pull some loot from Larry's fur! Ouch!"))
     }
 
 }

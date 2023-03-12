@@ -25,6 +25,10 @@ object LlamaSpawn {
 
     // Only world the Llama can spawn in (Spawn)
     private val world: World? = Bukkit.getWorld(Storage.data.get("world-name").toString())
+    private val x: Double = Storage.data.get("spawn.x") as Double
+    val y: Double = Storage.data.get("spawn.y") as Double
+    private val z: Double = Storage.data.get("spawn.z") as Double
+    val loc: Location = Location(world, x, y, z)
 
     // Spawn the llama at set location
     fun spawnLlama() {
@@ -38,6 +42,7 @@ object LlamaSpawn {
         lootLlama.isCarryingChest = true
         lootLlama.isTamed = true
 
+        customLlama.clear()
         customLlama[lootLlama] = true
 
         val randomNumber = (0..12).random()
@@ -85,10 +90,7 @@ object LlamaSpawn {
 
     // Get location to spawn Llama at
     private fun getLocation(): Location {
-        val x: Double = Storage.data.get("spawn.x") as Double
-        val y: Double = Storage.data.get("spawn.y") as Double
-        val z: Double = Storage.data.get("spawn.z") as Double
-        return Location(world, x, y, z)
+        return loc
     }
 
 }

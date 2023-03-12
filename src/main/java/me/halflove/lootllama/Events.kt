@@ -46,6 +46,10 @@ class Events: Listener {
                 if(randomNumber == 4) {
                     LlamaAbilities.warp(event.entity as Llama, event.damager as Player)
                 }
+
+                if(randomNumber == 5) {
+                    LlamaAbilities.grabLoot(event.damager as Player)
+                }
                 event.damage = 1.0
             }
         }
@@ -69,9 +73,11 @@ class Events: Listener {
     @EventHandler
     fun hurtLlama(event: EntityDamageEvent) {
         if(event.entityType == EntityType.LLAMA && LlamaSpawn.customLlama.containsKey(event.entity as Llama)) {
+            if (event.entity.location.y < LlamaSpawn.y - 38) {
+                event.entity.teleport(LlamaSpawn.loc)
+            }
             if(event.cause == EntityDamageEvent.DamageCause.FIRE) {
                 event.isCancelled = true
-                LlamaSpawn.customLlama.remove(event.entity as Llama)
             }
         }
     }

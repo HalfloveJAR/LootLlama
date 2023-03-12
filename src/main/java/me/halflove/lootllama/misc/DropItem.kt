@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack
 
 object DropItem {
 
-    private var lootTableSize = 0
+    var lootTableSize = 0
 
     fun generateLootTable(){
         val contentsSection: ConfigurationSection? = Storage.data.getConfigurationSection("loot")
@@ -29,7 +29,7 @@ object DropItem {
 
     fun itemDrop(loc: Location) {
         val randomNumber = (1..100).random()
-        if(randomNumber >= 69) {
+        if(randomNumber >= 76) {
             val randomNumber2 = (1..lootTableSize).random()
             successfulDrop(loc, getSlotItemStack(randomNumber2))
         }
@@ -40,7 +40,7 @@ object DropItem {
     }
 
     //Builds and returns the requested item (slot) stored in the data.yml
-    private fun getSlotItemStack(slot: Int): ItemStack {
+    fun getSlotItemStack(slot: Int): ItemStack {
 
         val stringAmount: String = Storage.data.get("loot.$slot.amount").toString()
 

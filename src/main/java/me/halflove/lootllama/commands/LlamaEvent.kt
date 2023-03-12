@@ -23,7 +23,7 @@ import org.bukkit.entity.Player
 class LlamaEvent: CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(sender.isOp && args.isEmpty()){
-            if(Storage.data.get("spawn.x") != null && !LlamaSpawn.llamaActive) {
+            if(Storage.data.get("spawn.x") != null) {
                 Bukkit.broadcastMessage("")
                 Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&c♫"))
                 Bukkit.broadcastMessage(
@@ -54,8 +54,6 @@ class LlamaEvent: CommandExecutor {
                         }, 4)
                     }
                 }
-            }else if(LlamaSpawn.llamaActive){
-                sender.sendMessage("Loot Llama currently active")
             }else{
                 sender.sendMessage("Spawn location not defined, try /llama setspawn")
             }
