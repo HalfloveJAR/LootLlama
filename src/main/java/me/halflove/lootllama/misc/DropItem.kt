@@ -29,14 +29,18 @@ object DropItem {
 
     fun itemDrop(loc: Location) {
         val randomNumber = (1..100).random()
-        if(randomNumber >= 76) {
-            val randomNumber2 = (1..lootTableSize).random()
-            successfulDrop(loc, getSlotItemStack(randomNumber2))
+        if(randomNumber >= 69) {
+            successfulDrop(loc, getRandomItem())
         }
     }
 
     private fun successfulDrop(loc: Location, item: ItemStack) {
         loc.world?.dropItemNaturally(loc, item)
+    }
+
+    fun getRandomItem(): ItemStack {
+        val randomNumber = (1..lootTableSize).random()
+        return getSlotItemStack(randomNumber)
     }
 
     //Builds and returns the requested item (slot) stored in the data.yml

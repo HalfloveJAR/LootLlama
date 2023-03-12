@@ -33,7 +33,7 @@ class Events: Listener {
             if(LlamaSpawn.customLlama.containsKey(event.entity as Llama)) {
                 DropItem.itemDrop(event.entity.location)
 
-                val randomNumber = (0..12).random()
+                val randomNumber = (0..16).random()
                 if(randomNumber == 0) { //7/13
                     LlamaAbilities.baby(event.entity as Llama)
                 }
@@ -43,11 +43,11 @@ class Events: Listener {
                 if(randomNumber == 3) {
                     LlamaAbilities.knockback(event.entity as Llama)
                 }
-                if(randomNumber == 4) {
+                if(randomNumber == 4 || randomNumber == 5) {
                     LlamaAbilities.warp(event.entity as Llama, event.damager as Player)
                 }
 
-                if(randomNumber == 5) {
+                if(randomNumber == 6) {
                     LlamaAbilities.grabLoot(event.damager as Player)
                 }
                 event.damage = 1.0

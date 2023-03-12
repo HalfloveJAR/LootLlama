@@ -83,8 +83,7 @@ object LlamaAbilities {
     }
 
     fun grabLoot(attacker: Player) {
-        val randomNumber = (1..DropItem.lootTableSize).random()
-        attacker.inventory.addItem(DropItem.getSlotItemStack(randomNumber))
+        attacker.inventory.addItem(DropItem.getRandomItem())
         attacker.playSound(attacker.location, Sound.ENTITY_COW_HURT, 2.0F, 2.0F);
         attacker.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&oYou pull some loot from Larry's fur! Ouch!"))
     }
