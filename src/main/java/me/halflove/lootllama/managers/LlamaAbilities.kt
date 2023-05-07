@@ -88,4 +88,17 @@ object LlamaAbilities {
         attacker.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&oYou pull some loot from Larry's fur! Ouch!"))
     }
 
+    fun grabKey(attacker: Player) {
+        val randomNumberRareTable = (0..3).random()
+        if(randomNumberRareTable == 0) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "magiccrates key give rarecrate ${attacker.name} 1")
+            attacker.playSound(attacker.location, Sound.ENTITY_COW_HURT, 2.0F, 0.0F);
+            attacker.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6&oYou yank a Rare Crate Key from behind Larry's ear! Yeow!!"))
+        } else {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "magiccrates key give votecrate ${attacker.name} 1")
+            attacker.playSound(attacker.location, Sound.ENTITY_COW_HURT, 2.0F, 0.0F);
+            attacker.sendMessage(ChatColor.translateAlternateColorCodes('&', "&e&oYou yank a Vote Crate Key from behind Larry's ear! Yeow!!"))
+        }
+    }
+
 }

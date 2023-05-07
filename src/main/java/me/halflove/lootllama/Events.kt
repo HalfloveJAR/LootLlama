@@ -50,6 +50,13 @@ class Events: Listener {
                 if(randomNumber == 6) {
                     LlamaAbilities.grabLoot(event.damager as Player)
                 }
+
+                if(randomNumber == 7) {
+                    val randomNumberRareTable = (0..2).random()
+                    if(randomNumberRareTable == 0) {
+                        LlamaAbilities.grabKey(event.damager as Player)
+                    }
+                }
                 event.damage = 1.0
             }
         }
