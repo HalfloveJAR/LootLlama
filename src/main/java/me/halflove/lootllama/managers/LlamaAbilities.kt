@@ -89,15 +89,23 @@ object LlamaAbilities {
     }
 
     fun grabKey(attacker: Player) {
-        val randomNumberRareTable = (0..3).random()
-        if(randomNumberRareTable == 0) {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "magiccrates key give rarecrate ${attacker.name} 1")
-            attacker.playSound(attacker.location, Sound.ENTITY_COW_HURT, 2.0F, 0.0F);
-            attacker.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6&oYou yank a Rare Crate Key from behind Larry's ear! Yeow!!"))
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "cc give p VoteCrate 1 ${attacker.name}")
+        attacker.playSound(attacker.location, Sound.ENTITY_COW_HURT, 2.0F, 0.0F);
+        attacker.sendMessage(ChatColor.translateAlternateColorCodes('&', "&e&oYou yank a Vote Crate Key from behind Larry's ear! MOOOOOOOO!"))
+    }
+
+    fun grabRareKey(attacker: Player, mostHits: Int) {
+
+        val randomNumber = (0..4).random()
+
+        if (randomNumber == 0) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "cc give p LegendaryCrate 1 ${attacker.name}")
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "broadcast &5${attacker.name}&f hit Larry the most times and earned a &lLegendary Crate Key&r&f (${mostHits} total hits)!")
+            attacker.playSound(attacker.location, Sound.UI_TOAST_CHALLENGE_COMPLETE, 2.0F, 0.0F)
         } else {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "magiccrates key give votecrate ${attacker.name} 1")
-            attacker.playSound(attacker.location, Sound.ENTITY_COW_HURT, 2.0F, 0.0F);
-            attacker.sendMessage(ChatColor.translateAlternateColorCodes('&', "&e&oYou yank a Vote Crate Key from behind Larry's ear! Yeow!!"))
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "cc give p RareCrate 1 ${attacker.name}")
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "broadcast &5${attacker.name}&f hit Larry the most times and earned a &lRare Crate Key&r&f (${mostHits} total hits)!")
+            attacker.playSound(attacker.location, Sound.ENTITY_PLAYER_LEVELUP, 2.0F, 0.0F)
         }
     }
 

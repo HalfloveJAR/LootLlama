@@ -27,10 +27,21 @@ import org.spigotmc.event.entity.EntityMountEvent
 
 class Events: Listener {
 
+    private var playerHitCount = hashMapOf<Player, Int>()
+
     @EventHandler(priority = EventPriority.HIGHEST)
     fun hitLlama(event: EntityDamageByEntityEvent) {
         if (event.entityType == EntityType.LLAMA && event.damager is Player) {
             if(LlamaSpawn.customLlama.containsKey(event.entity as Llama)) {
+
+                val player = event.damager as Player
+
+                if (!playerHitCount.containsKey(player)) {
+                    playerHitCount[player] = 1
+                } else {
+                    playerHitCount[player] = playerHitCount[player]!! + 1
+                }
+
                 DropItem.itemDrop(event.entity.location)
 
                 val randomNumber = (0..16).random()
@@ -72,8 +83,14 @@ class Events: Listener {
     @EventHandler
     fun deathLlama(event: EntityDeathEvent) {
         if(event.entityType == EntityType.LLAMA && LlamaSpawn.customLlama.containsKey(event.entity as Llama)) {
+            val result = playerHitCount.toList().sortedBy { (_, value) -> value}
+            val playerWithMostHits = result[result.size-1].first
+            val mostHits = result[result.size-1].second
+
             event.drops.clear()
             LlamaSpawn.llamaActive = false
+            LlamaAbilities.grabRareKey(playerWithMostHits, mostHits)
+            playerHitCount.clear()
         }
     }
 

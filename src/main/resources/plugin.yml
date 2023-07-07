@@ -1,9 +1,9 @@
 name: LootLlama
 version: ${project.version}
 main: me.halflove.lootllama.Main
-api-version: 1.19
+api-version: '1.20'
 authors: [ Halflove ]
-description: VoteParty LootLlama plugin for play.MCFriendly.us
+description: VoteParty LootLlama plugin for Nathan
 
 commands:
   lootllama:
