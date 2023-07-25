@@ -3,7 +3,7 @@ version: ${project.version}
 main: me.halflove.lootllama.Main
 api-version: '1.20'
 authors: [ Halflove ]
-description: VoteParty LootLlama plugin for Nathan
+description: Loot Llama Party for Vote Parties
 
 commands:
   lootllama:

@@ -1,5 +1,6 @@
 package me.halflove.lootllama
 
+import me.halflove.lootllama.commands.LlamaEvent
 import me.halflove.lootllama.managers.LlamaAbilities
 import me.halflove.lootllama.managers.LlamaSpawn
 import me.halflove.lootllama.misc.DropItem
@@ -32,7 +33,7 @@ class Events: Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     fun hitLlama(event: EntityDamageByEntityEvent) {
         if (event.entityType == EntityType.LLAMA && event.damager is Player) {
-            if(LlamaSpawn.customLlama.containsKey(event.entity as Llama)) {
+            if(LlamaSpawn.customLlama.containsKey(event.entity as Llama) && event.cause == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
 
                 val player = event.damager as Player
 
@@ -69,6 +70,15 @@ class Events: Listener {
                     }
                 }
                 event.damage = 1.0
+            }
+        }
+    }
+
+    @EventHandler
+    fun damageLlama(event: EntityDamageEvent) {
+        if (event.entityType == EntityType.LLAMA) {
+            if(LlamaSpawn.customLlama.containsKey(event.entity as Llama) && event.cause != EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
+                event.isCancelled = true
             }
         }
     }

@@ -23,6 +23,7 @@ import org.bukkit.potion.PotionEffectType
 object LlamaAbilities {
 
     val plugin: Plugin? = Bukkit.getServer().pluginManager.getPlugin("LootLlama")
+    var thisStuckCheckID: Int = -1
 
     fun baby(llama: Llama) {
         for(player: Player in Bukkit.getOnlinePlayers()) {
@@ -43,18 +44,19 @@ object LlamaAbilities {
                         }
                     }
                 }
-            }, 100)
+            }, 40)
         }
     }
 
     fun warp(llama: Llama, attacker: Player) {
-        val lastLoc: Location = llama.location
-        llama.teleport(attacker.location)
-        attacker.teleport(lastLoc)
+        if (llama.isAdult) {
+            llama.teleport(LlamaSpawn.loc)
+        }
         for(player: Player in Bukkit.getOnlinePlayers()) {
             if(player.location.world == llama.location.world) {
                 if(player.location.distance(llama.location) < 10) {
-                    player.playSound(player.location, Sound.ENTITY_SHULKER_TELEPORT, 2.0F, 2.0F);
+                    if (llama.isAdult)
+                        player.playSound(player.location, Sound.ENTITY_SHULKER_TELEPORT, 2.0F, 2.0F);
                 }
             }
         }
@@ -96,16 +98,20 @@ object LlamaAbilities {
 
     fun grabRareKey(attacker: Player, mostHits: Int) {
 
-        val randomNumber = (0..4).random()
+        val randomNumber = (0..3).random()
 
         if (randomNumber == 0) {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "cc give p LegendaryCrate 1 ${attacker.name}")
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "broadcast &5${attacker.name}&f hit Larry the most times and earned a &lLegendary Crate Key&r&f (${mostHits} total hits)!")
-            attacker.playSound(attacker.location, Sound.UI_TOAST_CHALLENGE_COMPLETE, 2.0F, 0.0F)
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "broadcast &5${attacker.name}&f hit Larry the most times and earned a &l&5Legendary Crate Key&r&f (${mostHits} total hits)!")
+            for(player: Player in Bukkit.getOnlinePlayers()) {
+                player.playSound(attacker.location, Sound.UI_TOAST_CHALLENGE_COMPLETE, 2.0F, 0.0F)
+            }
         } else {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "cc give p RareCrate 1 ${attacker.name}")
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "broadcast &5${attacker.name}&f hit Larry the most times and earned a &lRare Crate Key&r&f (${mostHits} total hits)!")
-            attacker.playSound(attacker.location, Sound.ENTITY_PLAYER_LEVELUP, 2.0F, 0.0F)
+            for(player: Player in Bukkit.getOnlinePlayers()) {
+                attacker.playSound(attacker.location, Sound.ENTITY_PLAYER_LEVELUP, 2.0F, 0.0F)
+            }
         }
     }
 
