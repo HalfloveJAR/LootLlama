@@ -6,7 +6,7 @@
 
     <groupId>me.halflove.lootllama</groupId>
     <artifactId>LootLlama</artifactId>
-    <version>1.3.3</version>
+    <version>1.4</version>
     <packaging>jar</packaging>
 
     <name>LootLlama</name>

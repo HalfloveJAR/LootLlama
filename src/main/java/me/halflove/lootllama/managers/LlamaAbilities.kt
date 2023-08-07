@@ -101,18 +101,28 @@ object LlamaAbilities {
         val randomNumber = (0..3).random()
 
         if (randomNumber == 0) {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "cc give p LegendaryCrate 1 ${attacker.name}")
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "broadcast &5${attacker.name}&f hit Larry the most times and earned a &l&5Legendary Crate Key&r&f (${mostHits} total hits)!")
-            for(player: Player in Bukkit.getOnlinePlayers()) {
-                player.playSound(attacker.location, Sound.UI_TOAST_CHALLENGE_COMPLETE, 2.0F, 0.0F)
-            }
+            grabLegendaryKey(attacker, mostHits)
         } else {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "cc give p RareCrate 1 ${attacker.name}")
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "broadcast &5${attacker.name}&f hit Larry the most times and earned a &lRare Crate Key&r&f (${mostHits} total hits)!")
             for(player: Player in Bukkit.getOnlinePlayers()) {
-                attacker.playSound(attacker.location, Sound.ENTITY_PLAYER_LEVELUP, 2.0F, 0.0F)
+                player.playSound(player.location, Sound.ENTITY_PLAYER_LEVELUP, 2.0F, 0.0F)
             }
         }
+    }
+
+    fun grabLegendaryKey(attacker: Player, mostHits: Int) {
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "cc give p LegendaryCrate 1 ${attacker.name}")
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "broadcast &5${attacker.name}&f hit Larry the most times and earned a &l&5Legendary Crate Key&r&f (${mostHits} total hits)!")
+        for(player: Player in Bukkit.getOnlinePlayers()) {
+            player.playSound(player.location, Sound.UI_TOAST_CHALLENGE_COMPLETE, 2.0F, 0.0F)
+        }
+    }
+
+    fun grabParticipationAward(player: Player, hits: Int) {
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "cc give p VoteCrate 1 ${player.name}")
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&cLarry &7-> &c&lYou&r&6] &fYou hit me &l$hits &r&ftimes and earned a &lVote Crate key&r&f!"))
+        player.playSound(player.location, Sound.BLOCK_NOTE_BLOCK_FLUTE, 2.0F, 0.0F)
     }
 
 }

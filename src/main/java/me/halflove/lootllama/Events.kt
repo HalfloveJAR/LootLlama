@@ -99,7 +99,21 @@ class Events: Listener {
 
             event.drops.clear()
             LlamaSpawn.llamaActive = false
-            LlamaAbilities.grabRareKey(playerWithMostHits, mostHits)
+
+            var playerCount = 0
+            for(player: Player in Bukkit.getOnlinePlayers()) {
+                playerCount += 1
+                if (playerHitCount.containsKey(player) && player != playerWithMostHits) {
+                    LlamaAbilities.grabParticipationAward(player, playerHitCount[player]!!)
+                }
+            }
+
+            if (playerCount >= 21) {
+                LlamaAbilities.grabLegendaryKey(playerWithMostHits, mostHits)
+            } else {
+                LlamaAbilities.grabRareKey(playerWithMostHits, mostHits)
+            }
+
             playerHitCount.clear()
         }
     }
