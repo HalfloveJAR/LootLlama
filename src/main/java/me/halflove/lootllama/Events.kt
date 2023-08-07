@@ -104,7 +104,7 @@ class Events: Listener {
             for(player: Player in Bukkit.getOnlinePlayers()) {
                 playerCount += 1
                 if (playerHitCount.containsKey(player) && player != playerWithMostHits) {
-                    LlamaAbilities.grabParticipationAward(player, playerHitCount[player]!!)
+                    LlamaAbilities.grabParticipationAward(player, playerHitCount[player]!!, mostHits)
                 }
             }
 
