@@ -31,7 +31,7 @@ class LlamaEvent: CommandExecutor {
         for (player: Player in Bukkit.getOnlinePlayers()) {
             player.playSound(player.location, Sound.ENTITY_PLAYER_LEVELUP, 1.0F, 0.0F);
         }
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "broadcast &fLarry the Loot Llama will spawn at &5/Warp Arena&f in &d$timeLeft seconds&r&f. &nMake some space in your inventory!&r")
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "essentials:broadcast &fLarry the Loot Llama will spawn at &5/Warp Arena&f in &d$timeLeft seconds&r&f. &nMake some space in your inventory!&r")
 
         LlamaAbilities.plugin?.let {
             countdownTask = Bukkit.getServer().scheduler.scheduleSyncRepeatingTask(it, {
@@ -44,7 +44,7 @@ class LlamaEvent: CommandExecutor {
                                 player.playSound(player.location, Sound.BLOCK_NOTE_BLOCK_BIT, 2.0F, 0.0F);
                             }
                         }
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "broadcast &fA Loot Llama will spawn at &5/Warp Arena&f in &d$timeLeft seconds")
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "essentials:broadcast &fA Loot Llama will spawn at &5/Warp Arena&f in &d$timeLeft seconds")
                     }
                     timeLeft--
                 } else {

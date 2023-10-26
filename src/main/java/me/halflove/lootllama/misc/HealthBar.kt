@@ -19,7 +19,7 @@ object HealthBar {
         for(player in Bukkit.getOnlinePlayers()){
             hp += 14.5
         }
-        if (hp > 232) hp = 232.0;
+        if (hp > 200) hp = 200.0;
         return hp
     }
 

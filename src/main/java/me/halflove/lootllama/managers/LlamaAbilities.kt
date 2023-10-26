@@ -104,7 +104,7 @@ object LlamaAbilities {
             grabLegendaryKey(attacker, mostHits)
         } else {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "cc give p RareCrate 1 ${attacker.name}")
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "broadcast &5${attacker.name}&f hit Larry the most times and earned a &lRare Crate Key&r&f (${mostHits} total hits)!")
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "essentials:broadcast &5${attacker.name}&f hit Larry the most times and earned a &lRare Crate Key&r&f (${mostHits} total hits)!")
             for(player: Player in Bukkit.getOnlinePlayers()) {
                 player.playSound(player.location, Sound.ENTITY_PLAYER_LEVELUP, 2.0F, 0.0F)
             }
@@ -113,7 +113,7 @@ object LlamaAbilities {
 
     fun grabLegendaryKey(attacker: Player, mostHits: Int) {
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "cc give p LegendaryCrate 1 ${attacker.name}")
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "broadcast &5${attacker.name}&f hit Larry the most times and earned a &l&5Legendary Crate Key&r&f (${mostHits} total hits)!")
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "essentials:broadcast &5${attacker.name}&f hit Larry the most times and earned a &l&5Legendary Crate Key&r&f (${mostHits} total hits)!")
         for(player: Player in Bukkit.getOnlinePlayers()) {
             player.playSound(player.location, Sound.UI_TOAST_CHALLENGE_COMPLETE, 2.0F, 0.0F)
         }
