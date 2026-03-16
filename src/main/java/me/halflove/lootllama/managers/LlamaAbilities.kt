@@ -91,7 +91,7 @@ object LlamaAbilities {
     }
 
     fun grabKey(attacker: Player) {
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "cc give p VoteCrate 1 ${attacker.name}")
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "crazycrates give p VoteCrate 1 ${attacker.name}")
         attacker.playSound(attacker.location, Sound.ENTITY_COW_HURT, 2.0F, 0.0F);
         attacker.sendMessage(ChatColor.translateAlternateColorCodes('&', "&e&oYou yank a Vote Crate Key from behind Larry's ear! MOOOOOOOO!"))
     }
@@ -103,8 +103,8 @@ object LlamaAbilities {
         if (randomNumber == 0) {
             grabLegendaryKey(attacker, mostHits)
         } else {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "cc give p RareCrate 1 ${attacker.name}")
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "essentials:broadcast &5${attacker.name}&f hit Larry the most times and earned a &lRare Crate Key&r&f (${mostHits} total hits)!")
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "crazycrates give p RareCrate 1 ${attacker.name}")
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "essentials:broadcast &b${attacker.name}&f hit Larry the most times and earned a &l&6Rare Crate Key&r&f (${mostHits} total hits)!")
             for(player: Player in Bukkit.getOnlinePlayers()) {
                 player.playSound(player.location, Sound.ENTITY_PLAYER_LEVELUP, 2.0F, 0.0F)
             }
@@ -112,7 +112,7 @@ object LlamaAbilities {
     }
 
     fun grabLegendaryKey(attacker: Player, mostHits: Int) {
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "cc give p LegendaryCrate 1 ${attacker.name}")
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "crazycrates give p LegendaryCrate 1 ${attacker.name}")
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "essentials:broadcast &5${attacker.name}&f hit Larry the most times and earned a &l&5Legendary Crate Key&r&f (${mostHits} total hits)!")
         for(player: Player in Bukkit.getOnlinePlayers()) {
             player.playSound(player.location, Sound.UI_TOAST_CHALLENGE_COMPLETE, 2.0F, 0.0F)
@@ -130,32 +130,32 @@ object LlamaAbilities {
                 }
             }
             in 35..Int.MAX_VALUE -> {
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "cc give p VoteCrate 3 ${player.name}")
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "crazycrates give p VoteCrate 7 ${player.name}")
                 player.sendMessage(
                     ChatColor.translateAlternateColorCodes(
                         '&',
-                        "&6[&cLarry &7-> &c&lYou&r&6] &fYou hit me &l$hits &r&ftimes and earned &lx3 Vote Crate keys&r&f!"
+                        "&6[&cLarry &7-> &c&lYou&r&6] &fYou hit me &l$hits &r&ftimes and earned &lx7 Vote Crate keys&r&f!"
                     )
                 )
                 player.playSound(player.location, Sound.BLOCK_NOTE_BLOCK_FLUTE, 2.0F, 2.0F)
             }
-            in 15..29 -> {
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "cc give p VoteCrate 2 ${player.name}")
+            in 15..34 -> {
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "crazycrates give p VoteCrate 5 ${player.name}")
                 player.sendMessage(
                     ChatColor.translateAlternateColorCodes(
                         '&',
-                        "&6[&cLarry &7-> &c&lYou&r&6] &fYou hit me &l$hits &r&ftimes and earned &lx2 Vote Crate keys&r&f!"
+                        "&6[&cLarry &7-> &c&lYou&r&6] &fYou hit me &l$hits &r&ftimes and earned &lx5 Vote Crate keys&r&f!"
                     )
                 )
                 player.playSound(player.location, Sound.BLOCK_NOTE_BLOCK_FLUTE, 2.0F, 1.0F)
 
             }
             else -> {
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "cc give p VoteCrate 1 ${player.name}")
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "crazycrates give p VoteCrate 3 ${player.name}")
                 player.sendMessage(
                     ChatColor.translateAlternateColorCodes(
                         '&',
-                        "&6[&cLarry &7-> &c&lYou&r&6] &fYou hit me &l$hits &r&ftimes and earned a &lVote Crate key&r&f!"
+                        "&6[&cLarry &7-> &c&lYou&r&6] &fYou hit me &l$hits &r&ftimes and earned &lx3 Vote Crate key&r&f!"
                     )
                 )
                 player.playSound(player.location, Sound.BLOCK_NOTE_BLOCK_FLUTE, 2.0F, 0.0F)

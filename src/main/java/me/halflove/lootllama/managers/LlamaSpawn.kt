@@ -28,12 +28,25 @@ object LlamaSpawn {
     // Only world the Llama can spawn in (Spawn)
     private val world: World? = Bukkit.getWorld(Storage.data.get("world-name").toString())
     private val x: Double = Storage.data.get("spawn.x") as Double
-    val y: Double = Storage.data.get("spawn.y") as Double
+    val y: Double = if (Storage.data.get("spawn.y") is Int) Storage.data.get("spawn.y") as Int * 1.0 else Storage.data.get("spawn.y") as Double
     private val z: Double = Storage.data.get("spawn.z") as Double
     val loc: Location = Location(world, x, y, z)
 
     // Spawn the llama at set location
     fun spawnLlama() {
+
+        // CHECK: If a llama is already active, remove the old entity and clear data
+        if (llamaActive || customLlama.isNotEmpty()) {
+            // Loop through existing llamas in the hashmap
+            for (oldLlama in customLlama.keys) {
+                // Remove the entity from the game world
+                oldLlama.remove()
+            }
+            // Clear the map to make room for the new one
+            customLlama.clear()
+            llamaActive = false
+        }
+
         val lootLlama: Llama = world?.spawnEntity(getLocation(), EntityType.LLAMA) as Llama
         lootLlama.addPotionEffect(PotionEffect(PotionEffectType.GLOWING, 99999999, 1))
         lootLlama.maxHealth = HealthBar.calcMaxHealth()
@@ -44,7 +57,7 @@ object LlamaSpawn {
         lootLlama.isCarryingChest = true
         lootLlama.isTamed = true
 
-        customLlama.clear()
+        // Add the new llama to the map
         customLlama[lootLlama] = true
 
         val randomNumber = (0..12).random()

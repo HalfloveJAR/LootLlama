@@ -1,10 +1,10 @@
 package me.halflove.lootllama
 
-import me.halflove.lootllama.commands.LlamaEvent
 import me.halflove.lootllama.managers.LlamaAbilities
 import me.halflove.lootllama.managers.LlamaSpawn
 import me.halflove.lootllama.misc.DropItem
 import org.bukkit.Bukkit
+import org.bukkit.Location
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Llama
 import org.bukkit.entity.Player
@@ -15,7 +15,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.event.player.PlayerInteractEntityEvent
-import org.spigotmc.event.entity.EntityMountEvent
+import org.bukkit.event.vehicle.VehicleEnterEvent
 
 /*
 *
@@ -84,7 +84,7 @@ class Events: Listener {
     }
 
     @EventHandler
-    fun clickLlama(event: PlayerInteractEntityEvent){
+    fun clickLlama(event: PlayerInteractEntityEvent) {
         if(event.rightClicked.type == EntityType.LLAMA && event.player.location.world?.name == "world") {
             event.isCancelled = true
         }
