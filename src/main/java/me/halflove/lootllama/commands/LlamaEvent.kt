@@ -31,7 +31,7 @@ class LlamaEvent: CommandExecutor {
         for (player: Player in Bukkit.getOnlinePlayers()) {
             player.playSound(player.location, Sound.ENTITY_PLAYER_LEVELUP, 1.0F, 0.0F);
         }
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "essentials:broadcast &fLarry the Loot Llama will spawn at &5/Warp Arena&f in &d$timeLeft seconds&r&f. &nMake some space in your inventory!&r")
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "essentials:broadcast &fJerry the &cEvil Easter Bunny&f will spawn at &5/Warp Arena&f in &d$timeLeft seconds&r&f. &nMake some space in your inventory!&r")
 
         LlamaAbilities.plugin?.let {
             countdownTask = Bukkit.getServer().scheduler.scheduleSyncRepeatingTask(it, {
@@ -44,7 +44,7 @@ class LlamaEvent: CommandExecutor {
                                 player.playSound(player.location, Sound.BLOCK_NOTE_BLOCK_BIT, 2.0F, 0.0F);
                             }
                         }
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "essentials:broadcast &fA Loot Llama will spawn at &5/Warp Arena&f in &d$timeLeft seconds")
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "essentials:broadcast &fJerry will spawn at &5/Warp Arena&f in &d$timeLeft seconds")
                     }
                     timeLeft--
                 } else {
@@ -62,13 +62,13 @@ class LlamaEvent: CommandExecutor {
             Bukkit.broadcastMessage(
                 ChatColor.translateAlternateColorCodes(
                     '&',
-                    "  &b♫  &e♫  &fA &dLoot Llama &fhas spawned at &6/Warp Arena"
+                    "  &b♫  &e♫  &cEvil Jerry &fhas spawned at &6/Warp Arena"
                 )
             )
             Bukkit.broadcastMessage(
                 ChatColor.translateAlternateColorCodes(
                     '&',
-                    "&a♫   &c♫          &fCome fight him for valuable loot!"
+                    "&a♫   &c♫          &fCome fight him for valuable easter loot!"
                 )
             )
             Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "  &e♫ "))
@@ -100,6 +100,7 @@ class LlamaEvent: CommandExecutor {
             Storage.addDataToFile("spawn.x", player.location.x)
             Storage.addDataToFile("spawn.y", player.location.y)
             Storage.addDataToFile("spawn.z", player.location.z)
+            Storage.addDataToFile("world-name", player.location.world?.name ?: "world")
             sender.sendMessage("Llama spawn set successfully")
         }
         return true

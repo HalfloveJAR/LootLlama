@@ -7,6 +7,7 @@ import org.bukkit.Location
 import org.bukkit.Sound
 import org.bukkit.entity.Llama
 import org.bukkit.entity.Player
+import org.bukkit.entity.Rabbit
 import org.bukkit.plugin.Plugin
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
@@ -25,7 +26,7 @@ object LlamaAbilities {
     val plugin: Plugin? = Bukkit.getServer().pluginManager.getPlugin("LootLlama")
     var thisStuckCheckID: Int = -1
 
-    fun baby(llama: Llama) {
+    fun baby(llama: Rabbit) {
         for(player: Player in Bukkit.getOnlinePlayers()) {
             if(player.location.world == llama.location.world) {
                 if(player.location.distance(llama.location) < 10) {
@@ -48,7 +49,7 @@ object LlamaAbilities {
         }
     }
 
-    fun warp(llama: Llama, attacker: Player) {
+    fun warp(llama: Rabbit, attacker: Player) {
         if (llama.isAdult) {
             llama.teleport(LlamaSpawn.loc)
         }
@@ -62,7 +63,7 @@ object LlamaAbilities {
         }
     }
 
-    fun knockback(llama: Llama) {
+    fun knockback(llama: Rabbit) {
         for(player: Player in Bukkit.getOnlinePlayers()) {
             if(player.location.world == llama.location.world) {
                 if(player.location.distance(llama.location) < 10) {
@@ -73,7 +74,7 @@ object LlamaAbilities {
         }
     }
 
-    fun superSpeed(llama: Llama) {
+    fun superSpeed(llama: Rabbit) {
         for(player: Player in Bukkit.getOnlinePlayers()) {
             if(player.location.world == llama.location.world) {
                 if(player.location.distance(llama.location) < 10) {
@@ -87,13 +88,19 @@ object LlamaAbilities {
     fun grabLoot(attacker: Player) {
         attacker.inventory.addItem(DropItem.getRandomItem())
         attacker.playSound(attacker.location, Sound.ENTITY_COW_HURT, 2.0F, 2.0F);
-        attacker.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&oYou pull some loot from Larry's fur! Ouch!"))
+        attacker.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&oYou pull some loot from Jerry's fur! Ouch!"))
     }
 
     fun grabKey(attacker: Player) {
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "crazycrates give p VoteCrate 1 ${attacker.name}")
         attacker.playSound(attacker.location, Sound.ENTITY_COW_HURT, 2.0F, 0.0F);
-        attacker.sendMessage(ChatColor.translateAlternateColorCodes('&', "&e&oYou yank a Vote Crate Key from behind Larry's ear! MOOOOOOOO!"))
+        attacker.sendMessage(ChatColor.translateAlternateColorCodes('&', "&e&oYou yank a Vote Crate Key from behind Jerry's ear! MOOOOOOOO!"))
+    }
+
+    fun grabEasterKey(attacker: Player) {
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "cc give p eastercrate 1 ${attacker.name}")
+        attacker.playSound(attacker.location, Sound.ENTITY_DOLPHIN_HURT, 2.0F, 0.0F);
+        attacker.sendMessage(ChatColor.translateAlternateColorCodes('&', "&e&oYou yank a Easter Crate Key from behind Jerry's ear! YEEEEOUCH!"))
     }
 
     fun grabRareKey(attacker: Player, mostHits: Int) {
@@ -104,7 +111,7 @@ object LlamaAbilities {
             grabLegendaryKey(attacker, mostHits)
         } else {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "crazycrates give p RareCrate 1 ${attacker.name}")
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "essentials:broadcast &b${attacker.name}&f hit Larry the most times and earned a &l&6Rare Crate Key&r&f (${mostHits} total hits)!")
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "essentials:broadcast &b${attacker.name}&f hit Jerry the most times and earned a &l&6Rare Crate Key&r&f (${mostHits} total hits)!")
             for(player: Player in Bukkit.getOnlinePlayers()) {
                 player.playSound(player.location, Sound.ENTITY_PLAYER_LEVELUP, 2.0F, 0.0F)
             }
@@ -113,7 +120,7 @@ object LlamaAbilities {
 
     fun grabLegendaryKey(attacker: Player, mostHits: Int) {
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "crazycrates give p LegendaryCrate 1 ${attacker.name}")
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "essentials:broadcast &5${attacker.name}&f hit Larry the most times and earned a &l&5Legendary Crate Key&r&f (${mostHits} total hits)!")
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "essentials:broadcast &5${attacker.name}&f hit Jerry the most times and earned a &l&5Legendary Crate Key&r&f (${mostHits} total hits)!")
         for(player: Player in Bukkit.getOnlinePlayers()) {
             player.playSound(player.location, Sound.UI_TOAST_CHALLENGE_COMPLETE, 2.0F, 0.0F)
         }
@@ -134,7 +141,7 @@ object LlamaAbilities {
                 player.sendMessage(
                     ChatColor.translateAlternateColorCodes(
                         '&',
-                        "&6[&cLarry &7-> &c&lYou&r&6] &fYou hit me &l$hits &r&ftimes and earned &lx7 Vote Crate keys&r&f!"
+                        "&6[&cJerry &7-> &c&lYou&r&6] &fYou hit me &l$hits &r&ftimes and earned &lx7 Vote Crate keys&r&f!"
                     )
                 )
                 player.playSound(player.location, Sound.BLOCK_NOTE_BLOCK_FLUTE, 2.0F, 2.0F)
@@ -144,7 +151,7 @@ object LlamaAbilities {
                 player.sendMessage(
                     ChatColor.translateAlternateColorCodes(
                         '&',
-                        "&6[&cLarry &7-> &c&lYou&r&6] &fYou hit me &l$hits &r&ftimes and earned &lx5 Vote Crate keys&r&f!"
+                        "&6[&cJerry &7-> &c&lYou&r&6] &fYou hit me &l$hits &r&ftimes and earned &lx5 Vote Crate keys&r&f!"
                     )
                 )
                 player.playSound(player.location, Sound.BLOCK_NOTE_BLOCK_FLUTE, 2.0F, 1.0F)
@@ -155,7 +162,7 @@ object LlamaAbilities {
                 player.sendMessage(
                     ChatColor.translateAlternateColorCodes(
                         '&',
-                        "&6[&cLarry &7-> &c&lYou&r&6] &fYou hit me &l$hits &r&ftimes and earned &lx3 Vote Crate key&r&f!"
+                        "&6[&cJerry &7-> &c&lYou&r&6] &fYou hit me &l$hits &r&ftimes and earned &lx3 Vote Crate key&r&f!"
                     )
                 )
                 player.playSound(player.location, Sound.BLOCK_NOTE_BLOCK_FLUTE, 2.0F, 0.0F)

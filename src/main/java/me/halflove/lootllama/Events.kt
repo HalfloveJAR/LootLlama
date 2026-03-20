@@ -8,6 +8,7 @@ import org.bukkit.Location
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Llama
 import org.bukkit.entity.Player
+import org.bukkit.entity.Rabbit
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
@@ -32,8 +33,8 @@ class Events: Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     fun hitLlama(event: EntityDamageByEntityEvent) {
-        if (event.entityType == EntityType.LLAMA && event.damager is Player) {
-            if(LlamaSpawn.customLlama.containsKey(event.entity as Llama) && event.cause == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
+        if (event.entityType == EntityType.RABBIT && event.damager is Player) {
+            if(LlamaSpawn.customLlama.containsKey(event.entity as Rabbit) && event.cause == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
 
                 val player = event.damager as Player
 
@@ -46,27 +47,28 @@ class Events: Listener {
                 DropItem.itemDrop(event.entity.location)
 
                 val randomNumber = (0..16).random()
-                if(randomNumber == 0) { //7/13
-                    LlamaAbilities.baby(event.entity as Llama)
-                }
-                if(randomNumber == 1 || randomNumber == 2) {
-                    LlamaAbilities.superSpeed(event.entity as Llama)
-                }
-                if(randomNumber == 3) {
-                    LlamaAbilities.knockback(event.entity as Llama)
-                }
-                if(randomNumber == 4 || randomNumber == 5) {
-                    LlamaAbilities.warp(event.entity as Llama, event.damager as Player)
-                }
 
-                if(randomNumber == 6) {
-                    LlamaAbilities.grabLoot(event.damager as Player)
-                }
-
-                if(randomNumber == 7) {
-                    val randomNumberRareTable = (0..2).random()
-                    if(randomNumberRareTable == 0) {
+                when (randomNumber) {
+                    0 -> { // 7/13
+                        LlamaAbilities.baby(event.entity as Rabbit)
+                    }
+                    1, 2 -> {
+                        LlamaAbilities.superSpeed(event.entity as Rabbit)
+                    }
+                    3 -> {
+                        LlamaAbilities.knockback(event.entity as Rabbit)
+                    }
+                    4, 5 -> {
+                        LlamaAbilities.warp(event.entity as Rabbit, event.damager as Player)
+                    }
+                    6 -> {
+                        LlamaAbilities.grabLoot(event.damager as Player)
+                    }
+                    7 -> {
                         LlamaAbilities.grabKey(event.damager as Player)
+                    }
+                    8 -> {
+                        LlamaAbilities.grabEasterKey(event.damager as Player)
                     }
                 }
                 event.damage = 1.0
@@ -76,8 +78,8 @@ class Events: Listener {
 
     @EventHandler
     fun damageLlama(event: EntityDamageEvent) {
-        if (event.entityType == EntityType.LLAMA) {
-            if(LlamaSpawn.customLlama.containsKey(event.entity as Llama) && event.cause != EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
+        if (event.entityType == EntityType.RABBIT) {
+            if(LlamaSpawn.customLlama.containsKey(event.entity as Rabbit) && event.cause != EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
                 event.isCancelled = true
             }
         }
@@ -85,14 +87,14 @@ class Events: Listener {
 
     @EventHandler
     fun clickLlama(event: PlayerInteractEntityEvent) {
-        if(event.rightClicked.type == EntityType.LLAMA && event.player.location.world?.name == "world") {
+        if(event.rightClicked.type == EntityType.RABBIT && event.player.location.world?.name == "world") {
             event.isCancelled = true
         }
     }
 
     @EventHandler
     fun deathLlama(event: EntityDeathEvent) {
-        if(event.entityType == EntityType.LLAMA && LlamaSpawn.customLlama.containsKey(event.entity as Llama)) {
+        if(event.entityType == EntityType.RABBIT && LlamaSpawn.customLlama.containsKey(event.entity as Rabbit)) {
             val result = playerHitCount.toList().sortedBy { (_, value) -> value}
             val playerWithMostHits = result[result.size-1].first
             val mostHits = result[result.size-1].second
@@ -120,7 +122,7 @@ class Events: Listener {
 
     @EventHandler
     fun hurtLlama(event: EntityDamageEvent) {
-        if(event.entityType == EntityType.LLAMA && LlamaSpawn.customLlama.containsKey(event.entity as Llama)) {
+        if(event.entityType == EntityType.RABBIT && LlamaSpawn.customLlama.containsKey(event.entity as Rabbit)) {
             if (event.entity.location.y < LlamaSpawn.y - 38) {
                 event.entity.teleport(LlamaSpawn.loc)
             }
