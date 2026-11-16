@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack
 *
 * @author Halflove
 *
-* http://Halflove.us
+* https://Halflove.dev
 * https://github.com/HalfloveJAR
 *
 */

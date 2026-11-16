@@ -1,6 +1,5 @@
 package me.halflove.lootllama.managers
 
-import me.halflove.lootllama.commands.LlamaEvent
 import me.halflove.lootllama.misc.HealthBar
 import me.halflove.lootllama.misc.Storage
 import org.bukkit.*
@@ -9,13 +8,12 @@ import org.bukkit.entity.Llama
 import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
-import kotlin.properties.Delegates
 
 /*
 *
 * @author Halflove
 *
-* http://Halflove.us
+* https://Halflove.dev
 * https://github.com/HalfloveJAR
 *
 */
@@ -26,7 +24,7 @@ object LlamaSpawn {
     var customLlama: HashMap<Llama, Boolean> = HashMap<Llama, Boolean>()
 
     // Only world the Llama can spawn in (Spawn)
-    private val world: World? = Bukkit.getWorld(Storage.data.get("world-name").toString())
+    private val world: World? = Bukkit.getWorld(Storage.data.get("spawn.world").toString())
     private val x: Double = Storage.data.get("spawn.x") as Double
     val y: Double = if (Storage.data.get("spawn.y") is Int) Storage.data.get("spawn.y") as Int * 1.0 else Storage.data.get("spawn.y") as Double
     private val z: Double = Storage.data.get("spawn.z") as Double

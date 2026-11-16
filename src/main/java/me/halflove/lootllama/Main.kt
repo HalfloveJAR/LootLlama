@@ -10,7 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin
 *
 * @author Halflove
 *
-* http://Halflove.us
+* https://Halflove.dev
 * https://github.com/HalfloveJAR
 *
 */

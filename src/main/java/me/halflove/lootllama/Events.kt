@@ -21,7 +21,7 @@ import org.bukkit.event.vehicle.VehicleEnterEvent
 *
 * @author Halflove
 *
-* http://Halflove.us
+* https://Halflove.dev
 * https://github.com/HalfloveJAR
 *
 */

@@ -11,7 +11,7 @@ import java.io.IOException
 *
 * @author Halflove
 *
-* http://Halflove.us
+* https://Halflove.dev
 * https://github.com/HalfloveJAR
 *
 */

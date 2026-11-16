@@ -1,8 +1,8 @@
 name: LootLlama
-version: ${project.version}
+version: ${version}
 main: me.halflove.lootllama.Main
-api-version: '1.20'
-authors: [ Halflove ]
+api-version: '26.1'
+authors: [ Halflove]
 description: Loot Llama Party for Vote Parties
 
 commands:

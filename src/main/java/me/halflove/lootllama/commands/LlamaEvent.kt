@@ -17,7 +17,7 @@ import kotlin.properties.Delegates
 *
 * @author Halflove
 *
-* http://Halflove.us
+* https://Halflove.dev
 * https://github.com/HalfloveJAR
 *
 */
@@ -97,6 +97,7 @@ class LlamaEvent: CommandExecutor {
             countdown(sender, 25)
         }else if(sender.isOp && args[0] == "setspawn"){
             val player: Player = sender as Player
+            Storage.addDataToFile("spawn.world", player.world.name)
             Storage.addDataToFile("spawn.x", player.location.x)
             Storage.addDataToFile("spawn.y", player.location.y)
             Storage.addDataToFile("spawn.z", player.location.z)

@@ -15,7 +15,7 @@ import org.bukkit.potion.PotionEffectType
 *
 * @author Halflove
 *
-* http://Halflove.us
+* https://Halflove.dev
 * https://github.com/HalfloveJAR
 *
 */
