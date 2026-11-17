@@ -36,6 +36,7 @@ class Events: Listener {
             if(LlamaSpawn.customLlama.containsKey(event.entity as Llama) && event.cause == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
 
                 val player = event.damager as Player
+                val abilityChance: Int = Main.instance.config.getInt("events.ability-chance", 8)
 
                 if (!playerHitCount.containsKey(player)) {
                     playerHitCount[player] = 1
@@ -43,30 +44,20 @@ class Events: Listener {
                     playerHitCount[player] = playerHitCount[player]!! + 1
                 }
 
+                // itemDrop function handles its own drop rate logic
                 DropItem.itemDrop(event.entity.location)
 
-                val randomNumber = (0..16).random()
-                if(randomNumber == 0) { //7/13
-                    LlamaAbilities.baby(event.entity as Llama)
-                }
-                if(randomNumber == 1 || randomNumber == 2) {
-                    LlamaAbilities.superSpeed(event.entity as Llama)
-                }
-                if(randomNumber == 3) {
-                    LlamaAbilities.knockback(event.entity as Llama)
-                }
-                if(randomNumber == 4 || randomNumber == 5) {
-                    LlamaAbilities.warp(event.entity as Llama, event.damager as Player)
-                }
-
-                if(randomNumber == 6) {
-                    LlamaAbilities.grabLoot(event.damager as Player)
-                }
-
-                if(randomNumber == 7) {
-                    val randomNumberRareTable = (0..2).random()
-                    if(randomNumberRareTable == 0) {
-                        LlamaAbilities.grabKey(event.damager as Player)
+                val randomNumber = (0..abilityChance).random()
+                if(randomNumber == 0) {
+                    val randomAbility = Main.instance.abilityTable.random()
+                    Main.instance.logger.info(randomAbility.toString())
+                    when (randomAbility) {
+                        "baby" -> LlamaAbilities.baby(event.entity as Llama)
+                        "super-speed" -> LlamaAbilities.superSpeed(event.entity as Llama)
+                        "knockback" -> LlamaAbilities.knockback(event.entity as Llama)
+                        "warp" -> LlamaAbilities.warp(event.entity as Llama, event.damager as Player)
+                        "grab-loot" -> LlamaAbilities.grabLoot(event.damager as Player)
+                        "grab-key" -> LlamaAbilities.grabKey(event.damager as Player)
                     }
                 }
                 event.damage = 1.0

@@ -1,0 +1,12 @@
+# Event chances are rolled every time the boss entity is hit by a player
+# The higher number for chance, the rarer
+events:
+  ability-chance: 5
+  # The higher the number the more common the ability
+  ability-weight:
+    baby: 2
+    super-speed: 3
+    knockback: 3
+    warp: 2
+    grab-loot: 2
+    grab-key: 1
