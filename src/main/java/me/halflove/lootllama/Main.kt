@@ -45,7 +45,6 @@ class Main: JavaPlugin() {
                 abilityTable.add(key)
             }
         }
-        logger.info(abilityTable.toString())
     }
 
 }

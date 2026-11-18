@@ -1,5 +1,6 @@
 package me.halflove.lootllama.managers
 
+import me.halflove.lootllama.Main
 import me.halflove.lootllama.misc.HealthBar
 import me.halflove.lootllama.misc.Storage
 import org.bukkit.*
@@ -21,7 +22,7 @@ import org.bukkit.potion.PotionEffectType
 object LlamaSpawn {
 
     var llamaActive: Boolean = false
-    var customLlama: HashMap<Llama, Boolean> = HashMap<Llama, Boolean>()
+    var customLlama: HashMap<Llama, Boolean> = HashMap()
 
     // Only world the Llama can spawn in (Spawn)
     private val world: World? = Bukkit.getWorld(Storage.data.get("spawn.world").toString())
@@ -49,55 +50,43 @@ object LlamaSpawn {
         lootLlama.addPotionEffect(PotionEffect(PotionEffectType.GLOWING, 99999999, 1))
         lootLlama.maxHealth = HealthBar.calcMaxHealth()
         lootLlama.health = HealthBar.calcMaxHealth()
-        lootLlama.customName = ChatColor.translateAlternateColorCodes('&', "&c&lL&6&la&e&lr&a&lr&b&ly")
+        lootLlama.customName = ChatColor.translateAlternateColorCodes('&', Main.instance.config.getString("entity.name") ?: "&c&lL&6&la&e&lr&a&lr&b&ly")
         lootLlama.isCustomNameVisible = true
-        lootLlama.color = Llama.Color.CREAMY
+
+        val llamaColorPool = listOf(
+            Llama.Color.CREAMY,
+            Llama.Color.BROWN,
+            Llama.Color.GRAY,
+            Llama.Color.WHITE
+        )
+
+        lootLlama.color = llamaColorPool.random()
         lootLlama.isCarryingChest = true
         lootLlama.isTamed = true
 
         // Add the new llama to the map
         customLlama[lootLlama] = true
 
-        val randomNumber = (0..12).random()
-        if(randomNumber == 0){
-            lootLlama.inventory.decor = ItemStack(Material.CYAN_CARPET)
-        }
-        if(randomNumber == 1){
-            lootLlama.inventory.decor = ItemStack(Material.MAGENTA_CARPET)
-        }
-        if(randomNumber == 2){
-            lootLlama.inventory.decor = ItemStack(Material.RED_CARPET)
-        }
-        if(randomNumber == 3){
-            lootLlama.inventory.decor = ItemStack(Material.BLUE_CARPET)
-        }
-        if(randomNumber == 4){
-            lootLlama.inventory.decor = ItemStack(Material.BROWN_CARPET)
-        }
-        if(randomNumber == 5){
-            lootLlama.inventory.decor = ItemStack(Material.GREEN_CARPET)
-        }
-        if(randomNumber == 6){
-            lootLlama.inventory.decor = ItemStack(Material.LIGHT_BLUE_CARPET)
-        }
-        if(randomNumber == 7){
-            lootLlama.inventory.decor = ItemStack(Material.LIME_CARPET)
-        }
-        if(randomNumber == 8){
-            lootLlama.inventory.decor = ItemStack(Material.ORANGE_CARPET)
-        }
-        if(randomNumber == 9){
-            lootLlama.inventory.decor = ItemStack(Material.PINK_CARPET)
-        }
-        if(randomNumber == 10){
-            lootLlama.inventory.decor = ItemStack(Material.PURPLE_CARPET)
-        }
-        if(randomNumber == 11){
-            lootLlama.inventory.decor = ItemStack(Material.YELLOW_CARPET)
-        }
-        if(randomNumber == 12){
-            lootLlama.inventory.decor = ItemStack(Material.WHITE_CARPET)
-        }
+        val carpetPool = listOf(
+            ItemStack(Material.CYAN_CARPET),
+            ItemStack(Material.MAGENTA_CARPET),
+            ItemStack(Material.RED_CARPET),
+            ItemStack(Material.BLUE_CARPET),
+            ItemStack(Material.BROWN_CARPET),
+            ItemStack(Material.GREEN_CARPET),
+            ItemStack(Material.LIGHT_BLUE_CARPET),
+            ItemStack(Material.LIME_CARPET),
+            ItemStack(Material.ORANGE_CARPET),
+            ItemStack(Material.PINK_CARPET),
+            ItemStack(Material.PURPLE_CARPET),
+            ItemStack(Material.YELLOW_CARPET),
+            ItemStack(Material.WHITE_CARPET),
+            ItemStack(Material.GRAY_CARPET),
+            ItemStack(Material.BLACK_CARPET)
+            )
+
+        val randomCarpet = carpetPool.random()
+        lootLlama.inventory.decor = randomCarpet
         llamaActive = true
     }
 

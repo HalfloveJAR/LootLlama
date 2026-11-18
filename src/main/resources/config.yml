@@ -1,3 +1,6 @@
+entity:
+  name: "&c&lL&6&la&e&lr&a&lr&b&ly"
+
 # Event chances are rolled every time the boss entity is hit by a player
 # The higher number for chance, the rarer
 events:

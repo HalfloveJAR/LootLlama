@@ -50,7 +50,6 @@ class Events: Listener {
                 val randomNumber = (0..abilityChance).random()
                 if(randomNumber == 0) {
                     val randomAbility = Main.instance.abilityTable.random()
-                    Main.instance.logger.info(randomAbility.toString())
                     when (randomAbility) {
                         "baby" -> LlamaAbilities.baby(event.entity as Llama)
                         "super-speed" -> LlamaAbilities.superSpeed(event.entity as Llama)
